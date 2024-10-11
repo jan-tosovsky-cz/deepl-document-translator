@@ -1,8 +1,11 @@
 # deepl-document-translator
 
-The purpose of this project is to demonstrate the issue with accessing the DeepL document translation endpoint
-using a default JDK HttpClient. While the request is constructed correctly, the transferred file is reported 
+The purpose of this project was to demonstrate the issue with accessing the DeepL document translation endpoint
+using a default JDK HttpClient. While the request was constructed correctly, the transferred file was reported 
 to be invalid.
+
+The root cause was an invalid multipart/form-data boundary string that exceeded the maximum length per spec.
+While some servers can handle this, DeepL is strict. The boundary string length was reduced and now it works fine.
 
 ## Test procedure
 
@@ -24,4 +27,4 @@ to be invalid.
 1. Clone the repo
 2. Open the project in your IDE (NetBeans, IntelliJ IDEA)
 3. Set up the executing environment (the `DEEPL_AUTH_KEY` environment variable and command line params) 
-4. Debug the `main` class in `App.java` 
+4. Debug the `main` class in `App.java`
