@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.math.BigInteger;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -16,7 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
+import java.util.UUID;
 
 public class App {
 
@@ -37,7 +36,7 @@ public class App {
             Path path, String sourceLanguage, String targetLanguage)
             throws Exception {
 
-        String boundary = new BigInteger(256, new Random()).toString();
+        String boundary = UUID.randomUUID().toString();
 
         String[] headers = new String[]{
                 "Content-Type", "multipart/form-data;boundary=" + boundary,
